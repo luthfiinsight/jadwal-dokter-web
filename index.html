@@ -22,6 +22,19 @@
             --transition-speed: 0.3s;
         }
 
+        /* === DARK MODE STYLES START === */
+        body.dark-mode {
+            --bg-color: #1a202c;
+            --card-bg: #2d3748;
+            --text-color: #e2e8f0;
+            --light-text: #a0aec0;
+            --border-color: #4a5568;
+            --shadow-color: rgba(0, 0, 0, 0.2);
+            --hover-shadow: rgba(0, 0, 0, 0.4);
+        }
+        /* === DARK MODE STYLES END === */
+
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -37,6 +50,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
         }
 
         .container {
@@ -46,7 +60,7 @@
             background-color: var(--card-bg);
             border-radius: 25px;
             box-shadow: 0 15px 30px var(--shadow-color);
-            transition: transform var(--transition-speed) ease-in-out;
+            transition: transform var(--transition-speed) ease-in-out, background-color var(--transition-speed), box-shadow var(--transition-speed);
             border: 1px solid var(--border-color);
             flex-grow: 1;
         }
@@ -56,6 +70,7 @@
             margin-bottom: 2.5rem;
             padding-bottom: 1.5rem;
             border-bottom: 2px solid var(--border-color);
+            position: relative; /* Needed for positioning the toggle */
         }
 
         .header h1 {
@@ -72,6 +87,39 @@
             font-size: 1.1rem;
             color: var(--light-text);
         }
+
+        /* === DARK MODE TOGGLE BUTTON STYLE === */
+        #darkModeToggle {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all var(--transition-speed);
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+        #darkModeToggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px var(--hover-shadow);
+        }
+        #darkModeToggle svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text-color);
+            transition: fill var(--transition-speed);
+        }
+        .moon-icon { display: block; }
+        .sun-icon { display: none; }
+        body.dark-mode .moon-icon { display: none; }
+        body.dark-mode .sun-icon { display: block; }
+
 
         .controls {
             display: grid;
@@ -90,7 +138,7 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             outline: none;
-            transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+            transition: border-color var(--transition-speed), box-shadow var(--transition-speed), background-color var(--transition-speed);
         }
 
         .search-container input:focus,
@@ -98,10 +146,19 @@
             border-color: #56ab2f;
             box-shadow: 0 0 0 4px rgba(86, 171, 47, 0.2);
         }
+        
+        /* Dark mode specific focus style */
+        body.dark-mode .search-container input:focus,
+        body.dark-mode .filter-container select:focus {
+            box-shadow: 0 0 0 4px rgba(168, 224, 99, 0.3);
+        }
 
         .search-container input::placeholder {
             color: #b0b8c4;
             font-style: italic;
+        }
+        body.dark-mode .search-container input::placeholder {
+            color: #718096;
         }
 
         .category-section {
@@ -150,7 +207,7 @@
             flex-direction: column;
             text-align: left;
             box-shadow: 0 10px 20px var(--shadow-color);
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed), background-color var(--transition-speed);
             border: 1px solid var(--border-color);
         }
 
@@ -163,6 +220,7 @@
             font-size: 1.7rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
+            color: var(--text-color);
         }
 
         .doctor-card p {
@@ -189,6 +247,7 @@
             border-radius: 15px;
             margin-top: 1rem;
             border: 1px dashed var(--border-color);
+            transition: background-color var(--transition-speed);
         }
 
         .doctor-card .schedule strong {
@@ -228,6 +287,12 @@
             .header p {
                 font-size: 1rem;
             }
+            #darkModeToggle {
+                top: 1rem;
+                right: 1rem;
+                width: 40px;
+                height: 40px;
+            }
             .controls {
                 grid-template-columns: 1fr;
             }
@@ -243,6 +308,10 @@
 <body>
     <div class="container">
         <div class="header">
+             <button id="darkModeToggle" aria-label="Toggle Dark Mode">
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13.14C21.04,13.14 20.45,13.23 19.89,13.42C18.45,12.48 16.6,12 14.5,12C8.7,12 4,16.7 4,22.5C4,23.32 4.18,24.09 4.5,24.78C3.89,24.63 3.32,24.42 2.79,24.09C1.22,23.23 0,21.5 0,19.5C0,15.58 3.16,12.42 7.08,12.03C7.68,8.82 10.45,6.4 13.9,6.4C16.97,6.4 19.54,8.35 20.58,10.93C21.43,10.84 22.3,11.13 22.8,11.66C23.63,12.44 23.3,13.14 21.64,13.14Z"/></svg>
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,7a5,5,0,0,1,5,5,5,5,0,0,1-5,5,5,5,0,0,1-5-5A5,5,0,0,1,12,7M12,9a3,3,0,0,0-3,3,3,3,0,0,0,3,3,3,3,0,0,0,3-3A3,3,0,0,0,12,9M12,2a1,1,0,0,1,1,1V5a1,1,0,0,1-2,0V3A1,1,0,0,1,12,2M19.07,4.93a1,1,0,0,1,.71.29,1,1,0,0,1,0,1.41l-2.83,2.83a1,1,0,0,1-1.41-1.41L18.36,5.64A1,1,0,0,1,19.07,4.93M22,12a1,1,0,0,1-1,1h-2a1,1,0,0,1,0-2h2A1,1,0,0,1,22,12M18.36,18.36a1,1,0,0,1-1.41,0l-2.83-2.83a1,1,0,1,1,1.41-1.41l2.83,2.83A1,1,0,0,1,18.36,18.36M12,20a1,1,0,0,1-1-1v-2a1,1,0,0,1,2,0v2A1,1,0,0,1,12,20M4.93,19.07a1,1,0,0,1-.71-.29,1,1,0,0,1,0-1.41l2.83-2.83a1,1,0,1,1,1.41,1.41L5.64,18.36A1,1,0,0,1,4.93,19.07M2,12a1,1,0,0,1,1-1H5a1,1,0,0,1,0,2H3A1,1,0,0,1,2,12M5.64,5.64A1,1,0,0,1,4.22,4.22L7.05,7.05a1,1,0,0,1-1.41,1.41Z"/></svg>
+            </button>
             <h1>Jadwal Praktik Dokter</h1>
             <p>Data jadwal Dapat Berubah Sewaktu-waktu Hub Operator 0751 8972525, Call Center Hermina 1500 488.</p>
         </div>
@@ -297,18 +366,15 @@
     </footer>
 
     <script>
-        // === GANTI URL INI DENGAN WEB APP URL BARU ANDA ===
+        // --- SCRIPT UTAMA ANDA ---
         const SPREADSHEET_API_URL = 'https://script.google.com/macros/s/AKfycbzdoWs_wOIpolNKjTnx9mS69c_I8JPmdhxP0vK71rxc6qGJgIu6IPj3lEzXvW14VWbC6A/exec';
-        
         let allDoctorsData = [];
 
-        // Fungsi untuk mengambil data dari Google Sheets
         async function fetchDoctorData() {
             const eksekutifList = document.getElementById('eksekutif-list');
             const bpjsList = document.getElementById('bpjs-list');
             
             try {
-                // Tampilkan pesan loading
                 eksekutifList.innerHTML = '<p class="loading-text">Memuat data dokter...</p>';
                 bpjsList.innerHTML = '<p class="loading-text">Memuat data dokter...</p>';
 
@@ -318,7 +384,6 @@
                 }
                 const data = await response.json();
                 
-                // Cek jika data yang diterima adalah objek error dari skrip Google
                 if (data.status === 'error') {
                     throw new Error(`Error dari Google Apps Script: ${data.message}`);
                 }
@@ -331,7 +396,6 @@
                     return;
                 }
 
-                // Hapus pesan loading setelah data berhasil dimuat
                 eksekutifList.innerHTML = '';
                 bpjsList.innerHTML = '';
 
@@ -345,12 +409,10 @@
             }
         }
 
-        // Fungsi untuk mengisi opsi filter spesialisasi secara dinamis
         function populateSpecialtyFilter(doctors) {
             const specialtyFilter = document.getElementById('specialtyFilter');
             const specialties = [...new Set(doctors.map(doc => doc.Spesialisasi).filter(Boolean))];
             
-            // Hapus opsi yang ada, kecuali "Semua Spesialisasi"
             while (specialtyFilter.options.length > 1) {
                 specialtyFilter.remove(1);
             }
@@ -363,7 +425,6 @@
             });
         }
 
-        // Fungsi untuk merender kartu dokter ke dalam HTML
         function renderDoctors(doctors) {
             const eksekutifList = document.getElementById('eksekutif-list');
             const bpjsList = document.getElementById('bpjs-list');
@@ -374,7 +435,6 @@
             let foundEksekutif = false;
             let foundBPJS = false;
             
-            // Mengelompokkan jadwal berdasarkan dokter
             const groupedByDoctor = doctors.reduce((acc, current) => {
                 const existingDoctor = acc.find(doc => doc.NamaDokter === current.NamaDokter && doc.Spesialisasi === current.Spesialisasi && doc.Layanan === current.Layanan);
                 if (existingDoctor) {
@@ -386,7 +446,6 @@
             }, []);
 
             groupedByDoctor.forEach(doctor => {
-                // Buat HTML untuk jadwal
                 const jadwalHTML = doctor.Jadwal.map(schedule => {
                     return `<strong>${schedule.Hari || 'Hari tidak tersedia'}:</strong><p>${schedule.Jam || 'Jam tidak tersedia'}</p>`;
                 }).join('');
@@ -411,7 +470,6 @@
                 }
             });
 
-            // Tampilkan/sembunyikan bagian layanan dan pesan tidak ada hasil
             const eksekutifSection = document.getElementById('eksekutif-section');
             const bpjsSection = document.getElementById('bpjs-section');
 
@@ -433,7 +491,6 @@
             }
         }
 
-        // Fungsi untuk menyaring dan menampilkan dokter
         function filterDoctors() {
             const searchInput = document.getElementById('searchInput').value.toLowerCase();
             const specialtyFilter = document.getElementById('specialtyFilter').value;
@@ -457,7 +514,40 @@
             renderDoctors(filteredDoctors);
         }
 
-        document.addEventListener('DOMContentLoaded', fetchDoctorData);
+        // --- DARK MODE SCRIPT ---
+        // Letakkan di dalam event listener DOMContentLoaded untuk memastikan tombolnya sudah ada
+        document.addEventListener('DOMContentLoaded', () => {
+            // Jalankan fungsi utama Anda
+            fetchDoctorData(); 
+
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const body = document.body;
+
+            // 1. Fungsi untuk menerapkan tema berdasarkan pilihan yang disimpan
+            const applyTheme = (theme) => {
+                if (theme === 'dark') {
+                    body.classList.add('dark-mode');
+                } else {
+                    body.classList.remove('dark-mode');
+                }
+            };
+            
+            // 2. Cek tema yang tersimpan di localStorage saat halaman dimuat
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            applyTheme(savedTheme);
+
+            // 3. Tambahkan event listener untuk tombol toggle
+            darkModeToggle.addEventListener('click', () => {
+                // Cek tema saat ini dan ganti
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'light');
+                    applyTheme('light');
+                } else {
+                    localStorage.setItem('theme', 'dark');
+                    applyTheme('dark');
+                }
+            });
+        });
     </script>
 </body>
 </html>
