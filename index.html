@@ -46,7 +46,7 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
-            padding: 2rem;
+            padding: 1rem; /* Adjusted for smaller content */
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -56,10 +56,10 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1.5rem;
+            padding: 1rem; /* Adjusted */
             background-color: var(--card-bg);
-            border-radius: 25px;
-            box-shadow: 0 15px 30px var(--shadow-color);
+            border-radius: 20px; /* Adjusted */
+            box-shadow: 0 10px 25px var(--shadow-color); /* Adjusted */
             transition: transform var(--transition-speed) ease-in-out, background-color var(--transition-speed), box-shadow var(--transition-speed);
             border: 1px solid var(--border-color);
             flex-grow: 1;
@@ -67,50 +67,50 @@
 
         .header {
             text-align: center;
-            margin-bottom: 2.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 1.5rem; /* Adjusted */
+            padding-bottom: 1rem; /* Adjusted */
+            border-bottom: 1px solid var(--border-color); /* Adjusted */
             position: relative;
         }
 
         .header h1 {
-            font-size: 2.8rem;
+            font-size: 1.4rem; /* REDUCED */
             font-weight: 700;
             background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem; /* Adjusted */
         }
 
         .header p {
-            font-size: 1.1rem;
+            font-size: 0.55rem; /* REDUCED */
             color: var(--light-text);
         }
 
         #darkModeToggle {
             position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
+            top: 1rem; /* Adjusted */
+            right: 1rem; /* Adjusted */
             background: var(--card-bg);
-            border: 2px solid var(--border-color);
+            border: 1px solid var(--border-color); /* Adjusted */
             border-radius: 50%;
-            width: 45px;
-            height: 45px;
+            width: 35px; /* Adjusted */
+            height: 35px; /* Adjusted */
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
             transition: all var(--transition-speed);
-            box-shadow: 0 4px 8px var(--shadow-color);
+            box-shadow: 0 2px 6px var(--shadow-color); /* Adjusted */
         }
         #darkModeToggle:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px var(--hover-shadow);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px var(--hover-shadow); /* Adjusted */
         }
         #darkModeToggle svg {
-            width: 20px;
-            height: 20px;
+            width: 14px; /* Adjusted */
+            height: 14px; /* Adjusted */
             fill: var(--text-color);
             transition: fill var(--transition-speed);
         }
@@ -121,18 +121,18 @@
 
         .controls {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjusted */
+            gap: 1rem; /* Adjusted */
+            margin-bottom: 1.5rem; /* Adjusted */
         }
 
         .search-container input,
         .filter-container select {
             width: 100%;
-            padding: 1rem 1.25rem;
-            font-size: 1rem;
-            border: 2px solid var(--border-color);
-            border-radius: 15px;
+            padding: 0.5rem 0.75rem; /* Adjusted */
+            font-size: 0.5rem; /* REDUCED */
+            border: 1px solid var(--border-color); /* Adjusted */
+            border-radius: 10px; /* Adjusted */
             background-color: var(--bg-color);
             color: var(--text-color);
             outline: none;
@@ -142,12 +142,12 @@
         .search-container input:focus,
         .filter-container select:focus {
             border-color: #56ab2f;
-            box-shadow: 0 0 0 4px rgba(86, 171, 47, 0.2);
+            box-shadow: 0 0 0 3px rgba(86, 171, 47, 0.2); /* Adjusted */
         }
         
         body.dark-mode .search-container input:focus,
         body.dark-mode .filter-container select:focus {
-            box-shadow: 0 0 0 4px rgba(168, 224, 99, 0.3);
+            box-shadow: 0 0 0 3px rgba(168, 224, 99, 0.3); /* Adjusted */
         }
 
         .search-container input::placeholder {
@@ -159,21 +159,21 @@
         }
 
         .category-section {
-            margin-top: 3rem;
-            margin-bottom: 2rem;
+            margin-top: 1.5rem; /* Adjusted */
+            margin-bottom: 1rem; /* Adjusted */
         }
         
         .loading-text, .no-results-text {
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 0.6rem; /* REDUCED */
             color: var(--light-text);
-            margin-top: 50px;
-            grid-column: 1 / -1; /* Span all columns */
+            margin-top: 25px; /* Adjusted */
+            grid-column: 1 / -1;
         }
 
         .category-section h2 {
-            font-size: 2.2rem;
-            margin-bottom: 2rem;
+            font-size: 1.1rem; /* REDUCED */
+            margin-bottom: 1.5rem; /* Adjusted */
             text-align: center;
             color: #56ab2f;
             position: relative;
@@ -182,37 +182,35 @@
         .category-section h2::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -5px; /* Adjusted */
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 5px;
+            width: 40px; /* Adjusted */
+            height: 2px; /* Adjusted */
             background: var(--secondary-gradient);
-            border-radius: 5px;
+            border-radius: 2px;
         }
         
         .doctor-list {
             display: grid;
-            /* Changed to 4 columns */
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Adjusted for smaller content */
+            gap: 1rem; /* Adjusted */
         }
 
         .doctor-card {
             background: var(--card-bg);
-            border-radius: 20px;
-            padding: 2rem;
+            border-radius: 15px; /* Adjusted */
+            padding: 1rem; /* Adjusted */
             display: flex;
             flex-direction: column;
             text-align: left;
-            box-shadow: 0 10px 20px var(--shadow-color);
+            box-shadow: 0 5px 10px var(--shadow-color); /* Adjusted */
             transition: transform var(--transition-speed), box-shadow var(--transition-speed), background-color var(--transition-speed), border-color var(--transition-speed);
             border: 1px solid var(--border-color);
             position: relative;
             overflow: hidden;
         }
         
-        /* === STATUS: TIDAK PRAKTEK STYLE START === */
         .doctor-card.not-practicing {
             background-color: var(--danger-bg-color);
             border-color: var(--danger-color);
@@ -220,15 +218,15 @@
         .doctor-card.not-practicing::before {
             content: 'TIDAK PRAKTEK';
             position: absolute;
-            top: 15px;
-            right: -45px;
+            top: 8px; /* Adjusted */
+            right: -25px; /* Adjusted */
             background: var(--danger-color);
             color: white;
-            padding: 5px 40px;
-            font-size: 0.8rem;
+            padding: 3px 20px; /* Adjusted */
+            font-size: 0.4rem; /* REDUCED */
             font-weight: bold;
             transform: rotate(45deg);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
         .doctor-card.not-practicing h3,
         .doctor-card.not-practicing .schedule strong {
@@ -239,45 +237,43 @@
          .doctor-card.not-practicing .schedule p {
             opacity: 0.7;
         }
-        /* === STATUS: TIDAK PRAKTEK STYLE END === */
-
 
         .doctor-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px var(--hover-shadow);
+            transform: translateY(-5px); /* Adjusted */
+            box-shadow: 0 10px 20px var(--hover-shadow); /* Adjusted */
         }
 
         .doctor-card h3 {
-            font-size: 1.7rem;
+            font-size: 0.85rem; /* REDUCED */
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem; /* Adjusted */
             color: var(--text-color);
             transition: color var(--transition-speed);
         }
 
         .doctor-card p {
-            font-size: 1rem;
+            font-size: 0.5rem; /* REDUCED */
             color: var(--light-text);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem; /* Adjusted */
         }
         
         .doctor-card .specialty {
             background: var(--primary-gradient);
             color: #fff;
-            padding: 0.4rem 1.2rem;
-            border-radius: 30px;
+            padding: 0.2rem 0.6rem; /* Adjusted */
+            border-radius: 15px; /* Adjusted */
             font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+            font-size: 0.45rem; /* REDUCED */
+            margin-bottom: 0.5rem; /* Adjusted */
             display: inline-block;
         }
 
         .doctor-card .schedule {
             width: 100%;
             background-color: var(--bg-color);
-            padding: 1rem;
-            border-radius: 15px;
-            margin-top: 1rem;
+            padding: 0.5rem; /* Adjusted */
+            border-radius: 10px; /* Adjusted */
+            margin-top: 0.5rem; /* Adjusted */
             border: 1px dashed var(--border-color);
             transition: background-color var(--transition-speed), border-color var(--transition-speed);
         }
@@ -288,7 +284,7 @@
 
         .doctor-card .schedule strong {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem; /* Adjusted */
             font-weight: 700;
             color: #56ab2f;
             transition: color var(--transition-speed);
@@ -297,27 +293,27 @@
         .doctor-card .schedule p {
             margin: 0;
             color: var(--text-color);
-            font-size: 0.95rem;
+            font-size: 0.475rem; /* REDUCED */
         }
         
-        /* === PAGINATION STYLE START === */
         .pagination-controls {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 2.5rem;
-            gap: 0.5rem;
+            margin-top: 1.5rem; /* Adjusted */
+            gap: 0.25rem; /* Adjusted */
         }
         .pagination-controls button {
             background-color: var(--card-bg);
-            border: 2px solid var(--border-color);
+            border: 1px solid var(--border-color); /* Adjusted */
             color: var(--text-color);
-            padding: 0.6rem 1rem;
-            border-radius: 10px;
+            padding: 0.3rem 0.5rem; /* Adjusted */
+            border-radius: 8px; /* Adjusted */
             cursor: pointer;
             transition: all var(--transition-speed);
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
+            font-size: 0.5rem; /* Added to ensure consistency */
         }
         .pagination-controls button:hover:not(:disabled) {
             background: #56ab2f;
@@ -330,38 +326,30 @@
         }
         .pagination-controls .page-number {
             font-weight: 600;
+            font-size: 0.5rem; /* REDUCED */
+            padding: 0 0.25rem;
         }
-        /* === PAGINATION STYLE END === */
 
         .footer {
             text-align: center;
-            padding: 1.5rem;
-            margin-top: 3rem;
-            font-size: 0.9rem;
+            padding: 1rem; /* Adjusted */
+            margin-top: 1.5rem; /* Adjusted */
+            font-size: 0.45rem; /* REDUCED */
             color: var(--light-text);
             border-top: 1px solid var(--border-color);
         }
 
-        @media (max-width: 1200px) {
-            .doctor-list {
-                /* 3 columns on tablets */
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            }
-        }
-
         @media (max-width: 768px) {
-            body { padding: 1rem; }
-            .container { padding: 1rem; border-radius: 15px; }
-            .header h1 { font-size: 2.2rem; }
-            .header p { font-size: 1rem; }
-            #darkModeToggle { top: 1rem; right: 1rem; width: 40px; height: 40px; }
+            body { padding: 0.5rem; }
+            .container { padding: 0.75rem; border-radius: 10px; }
+            .header h1 { font-size: 1.1rem; /* REDUCED */ }
+            .header p { font-size: 0.5rem; /* REDUCED */ }
+            #darkModeToggle { top: 0.5rem; right: 0.5rem; width: 30px; height: 30px; }
+            #darkModeToggle svg { width: 12px; height: 12px; }
             .controls { grid-template-columns: 1fr; }
-            .doctor-list {
-                /* 1 column on mobile */
-                grid-template-columns: 1fr;
-            }
-            .doctor-card { padding: 1.5rem; }
-            .doctor-card h3 { font-size: 1.5rem; }
+            .doctor-list { grid-template-columns: 1fr; }
+            .doctor-card { padding: 0.75rem; }
+            .doctor-card h3 { font-size: 0.75rem; /* REDUCED */ }
         }
     </style>
 </head>
@@ -424,11 +412,12 @@
     </footer>
 
     <script>
+        // The JavaScript logic remains the same as the previous version.
+        // No changes were needed here for the font size adjustment.
         const SPREADSHEET_API_URL = 'https://script.google.com/macros/s/AKfycbzdoWs_wOIpolNKjTnx9mS69c_I8JPmdhxP0vK71rxc6qGJgIu6IPj3lEzXvW14VWbC6A/exec';
         let allDoctorsData = [];
         let filteredDoctorsData = []; 
         
-        // State for pagination
         const paginationState = {
             eksekutif: { currentPage: 1, itemsPerPage: 12 },
             bpjs: { currentPage: 1, itemsPerPage: 12 }
@@ -461,7 +450,7 @@
                 }
                 
                 populateSpecialtyFilter(allDoctorsData);
-                filterDoctors(); // Initial render based on default filters
+                filterDoctors();
             } catch (error) {
                 console.error("Error fetching data:", error);
                 const errorMessage = `<p class="loading-text" style="color: red;"><strong>Gagal Memuat Data:</strong> ${error.message}.<br><br>Pastikan Web App URL sudah benar dan skrip di-deploy ulang dengan akses 'Anyone'.</p>`;
@@ -474,7 +463,6 @@
             const specialtyFilter = document.getElementById('specialtyFilter');
             const specialties = [...new Set(doctors.map(doc => doc.Spesialisasi).filter(Boolean))];
             
-            // Clear old options except the first one
             while (specialtyFilter.options.length > 1) {
                 specialtyFilter.remove(1);
             }
@@ -488,7 +476,6 @@
         }
         
         function groupDoctors(doctors) {
-            // Group schedules by doctor, specialty, service, and status
             return doctors.reduce((acc, current) => {
                 const key = `${current.NamaDokter}-${current.Spesialisasi}-${current.Layanan}-${current.Status}`;
                 let existingDoctor = acc.find(doc => doc.key === key);
@@ -501,7 +488,7 @@
                         NamaDokter: current.NamaDokter,
                         Spesialisasi: current.Spesialisasi,
                         Layanan: current.Layanan,
-                        Status: current.Status, // Make sure to get the Status
+                        Status: current.Status,
                         Jadwal: [{ Hari: current.Hari, Jam: current.Jam }] 
                     });
                 }
@@ -519,7 +506,6 @@
 
             if (doctors.length === 0) {
                 const serviceFilterValue = document.getElementById('serviceFilter').value;
-                // Show message only if this service type is selected or all are selected
                 if (serviceFilterValue === '' || serviceFilterValue === (serviceType === 'eksekutif' ? 'Eksekutif' : 'BPJS')) {
                      listElement.innerHTML = '<p class="no-results-text">Tidak ada dokter yang cocok dengan kriteria.</p>';
                 }
@@ -530,14 +516,13 @@
             document.getElementById(`${serviceType}-section`).style.display = 'block';
 
             const totalPages = Math.ceil(doctors.length / state.itemsPerPage);
-            state.currentPage = Math.min(state.currentPage, totalPages) || 1; // Ensure current page is valid
+            state.currentPage = Math.min(state.currentPage, totalPages) || 1;
 
             const start = (state.currentPage - 1) * state.itemsPerPage;
             const end = start + state.itemsPerPage;
             const paginatedDoctors = doctors.slice(start, end);
 
             paginatedDoctors.forEach(doctor => {
-                // Sort schedule by day of the week
                 const dayOrder = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
                 const sortedJadwal = doctor.Jadwal.sort((a, b) => {
                     const dayA = a.Hari ? parseInt(a.Hari.split('.')[0]) : 8;
@@ -564,7 +549,6 @@
                 listElement.innerHTML += cardHTML;
             });
             
-            // Render Pagination Controls
             if (totalPages > 1) {
                 const prevButton = document.createElement('button');
                 prevButton.textContent = 'Prev';
@@ -601,7 +585,6 @@
             renderPaginatedDoctors('eksekutif', eksekutifDoctors);
             renderPaginatedDoctors('bpjs', bpjsDoctors);
 
-            // Hide sections if filters are active and no results are found
             const serviceFilter = document.getElementById('serviceFilter').value;
             if (serviceFilter === 'Eksekutif') {
                  document.getElementById('bpjs-section').style.display = 'none';
@@ -630,7 +613,6 @@
                 return matchesSearch && matchesSpecialty && matchesService && matchesDay;
             });
             
-            // Reset page number on new filter
             paginationState.eksekutif.currentPage = 1;
             paginationState.bpjs.currentPage = 1;
 
