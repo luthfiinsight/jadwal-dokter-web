@@ -74,7 +74,7 @@
         }
 
         .header h1 {
-            font-size: 2.8rem; /* RESTORED to original size */
+            font-size: 2.8rem;
             font-weight: 700;
             background: var(--primary-gradient);
             -webkit-background-clip: text;
@@ -84,7 +84,7 @@
         }
 
         .header p {
-            font-size: 1.1rem; /* RESTORED to original size */
+            font-size: 1.1rem;
             color: var(--light-text);
         }
 
@@ -130,7 +130,7 @@
         .filter-container select {
             width: 100%;
             padding: 1rem 1.25rem;
-            font-size: 1rem; /* RESTORED to original size */
+            font-size: 1rem;
             border: 2px solid var(--border-color);
             border-radius: 15px;
             background-color: var(--bg-color);
@@ -165,14 +165,14 @@
         
         .loading-text, .no-results-text {
             text-align: center;
-            font-size: 1.2rem; /* RESTORED to original size */
+            font-size: 1.2rem;
             color: var(--light-text);
             margin-top: 50px;
             grid-column: 1 / -1;
         }
 
         .category-section h2 {
-            font-size: 2.2rem; /* RESTORED to original size */
+            font-size: 2.2rem;
             margin-bottom: 2rem;
             text-align: center;
             color: #56ab2f;
@@ -200,7 +200,7 @@
         .doctor-card {
             background: var(--card-bg);
             border-radius: 20px;
-            padding: 1.5rem; /* Adjusted padding for content */
+            padding: 1.5rem;
             display: flex;
             flex-direction: column;
             text-align: left;
@@ -223,7 +223,7 @@
             background: var(--danger-color);
             color: white;
             padding: 5px 40px;
-            font-size: 0.9rem; /* Kept slightly larger for visibility */
+            font-size: 0.8rem;
             font-weight: bold;
             transform: rotate(45deg);
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
@@ -243,9 +243,8 @@
             box-shadow: 0 20px 40px var(--hover-shadow);
         }
 
-        /* === FONT SIZE REDUCTION FOR DOCTOR CARD CONTENT === */
         .doctor-card h3 {
-            font-size: 0.9rem; /* REDUCED */
+            font-size: 0.9rem;
             font-weight: 700;
             margin-bottom: 0.25rem;
             color: var(--text-color);
@@ -253,7 +252,7 @@
         }
 
         .doctor-card p {
-            font-size: 0.8rem; /* REDUCED */
+            font-size: 0.55rem;
             color: var(--light-text);
             margin-bottom: 0.25rem;
         }
@@ -264,16 +263,15 @@
             padding: 0.2rem 0.8rem;
             border-radius: 30px;
             font-weight: 600;
-            font-size: 0.8rem; /* REDUCED */
+            font-size: 0.5rem;
             margin-bottom: 0.75rem;
             display: inline-block;
         }
-        /* ====================================================== */
 
         .doctor-card .schedule {
             width: 100%;
             background-color: var(--bg-color);
-            padding: 0.75rem; /* Adjusted padding */
+            padding: 0.75rem;
             border-radius: 15px;
             margin-top: 0.75rem;
             border: 1px dashed var(--border-color);
@@ -290,15 +288,25 @@
             font-weight: 700;
             color: #56ab2f;
             transition: color var(--transition-speed);
-            font-size: 0.8rem; /* REDUCED */
+            font-size: 0.5rem;
         }
 
         .doctor-card .schedule p {
             margin: 0;
             color: var(--text-color);
-            font-size: 0.8rem; /* REDUCED */
+            font-size: 0.5rem;
         }
         
+        /* === NEW STYLE FOR CANCELLED TIME SLOT === */
+        .schedule .not-practicing-time strong {
+            color: var(--danger-color) !important;
+            text-decoration: line-through;
+        }
+        .schedule .not-practicing-time p {
+             color: var(--danger-color) !important;
+        }
+        /* ======================================= */
+
         .pagination-controls {
             display: flex;
             justify-content: center;
@@ -334,7 +342,7 @@
             text-align: center;
             padding: 1.5rem;
             margin-top: 3rem;
-            font-size: 0.9rem; /* RESTORED to original size */
+            font-size: 0.9rem;
             color: var(--light-text);
             border-top: 1px solid var(--border-color);
         }
@@ -354,7 +362,7 @@
             .controls { grid-template-columns: 1fr; }
             .doctor-list { grid-template-columns: 1fr; }
             .doctor-card { padding: 1.5rem; }
-            .doctor-card h3 { font-size: 1rem; /* Adjusted for mobile */ }
+            .doctor-card h3 { font-size: 1rem; }
         }
     </style>
 </head>
@@ -417,7 +425,6 @@
     </footer>
 
     <script>
-        // The JavaScript logic remains unchanged.
         const SPREADSHEET_API_URL = 'https://script.google.com/macros/s/AKfycbzdoWs_wOIpolNKjTnx9mS69c_I8JPmdhxP0vK71rxc6qGJgIu6IPj3lEzXvW14VWbC6A/exec';
         let allDoctorsData = [];
         let filteredDoctorsData = []; 
@@ -454,7 +461,7 @@
                 }
                 
                 populateSpecialtyFilter(allDoctorsData);
-                filterDoctors(); // Initial render based on default filters
+                filterDoctors();
             } catch (error) {
                 console.error("Error fetching data:", error);
                 const errorMessage = `<p class="loading-text" style="color: red;"><strong>Gagal Memuat Data:</strong> ${error.message}.<br><br>Pastikan Web App URL sudah benar dan skrip di-deploy ulang dengan akses 'Anyone'.</p>`;
@@ -479,25 +486,39 @@
             });
         }
         
+        // MODIFIED groupDoctors to handle both overall Status and per-time Keterangan
         function groupDoctors(doctors) {
-            return doctors.reduce((acc, current) => {
-                const key = `${current.NamaDokter}-${current.Spesialisasi}-${current.Layanan}-${current.Status}`;
-                let existingDoctor = acc.find(doc => doc.key === key);
-                
-                if (existingDoctor) {
-                    existingDoctor.Jadwal.push({ Hari: current.Hari, Jam: current.Jam });
-                } else {
-                    acc.push({ 
-                        key: key,
+            const grouped = doctors.reduce((acc, current) => {
+                const key = `${current.NamaDokter}-${current.Spesialisasi}-${current.Layanan}`;
+                let existingDoctor = acc[key];
+
+                if (!existingDoctor) {
+                    acc[key] = {
                         NamaDokter: current.NamaDokter,
                         Spesialisasi: current.Spesialisasi,
                         Layanan: current.Layanan,
-                        Status: current.Status, 
-                        Jadwal: [{ Hari: current.Hari, Jam: current.Jam }] 
-                    });
+                        Status: '', // Default overall status
+                        Jadwal: []
+                    };
+                    existingDoctor = acc[key];
                 }
+
+                // Add schedule with its specific Keterangan
+                existingDoctor.Jadwal.push({
+                    Hari: current.Hari,
+                    Jam: current.Jam,
+                    Keterangan: current.Keterangan // Capture the Keterangan for the specific time
+                });
+
+                // If any row for a doctor is marked "Tidak Praktek", the entire card gets the banner
+                if (current.Status && current.Status.toLowerCase().trim() === 'tidak praktek') {
+                    existingDoctor.Status = 'Tidak Praktek';
+                }
+
                 return acc;
-            }, []);
+            }, {});
+
+            return Object.values(grouped);
         }
 
         function renderPaginatedDoctors(serviceType, doctors) {
@@ -527,17 +548,24 @@
             const paginatedDoctors = doctors.slice(start, end);
 
             paginatedDoctors.forEach(doctor => {
-                const dayOrder = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
                 const sortedJadwal = doctor.Jadwal.sort((a, b) => {
                     const dayA = a.Hari ? parseInt(a.Hari.split('.')[0]) : 8;
                     const dayB = b.Hari ? parseInt(b.Hari.split('.')[0]) : 8;
                     return dayA - dayB;
                 });
-
+                
+                // MODIFIED jadwalHTML to check Keterangan for each time slot
                 const jadwalHTML = sortedJadwal.map(schedule => {
-                    return `<strong>${schedule.Hari || 'Hari tidak tersedia'}:</strong><p>${schedule.Jam || 'Jam tidak tersedia'}</p>`;
-                }).join('');
+                    const isTimeNotPracticing = schedule.Keterangan && schedule.Keterangan.toLowerCase().trim() === 'tidak praktek';
+                    const timeSlotClass = isTimeNotPracticing ? 'not-practicing-time' : '';
 
+                    return `<div class="${timeSlotClass}">
+                                <strong>${schedule.Hari || 'Hari tidak tersedia'}:</strong>
+                                <p>${schedule.Jam || 'Jam tidak tersedia'}</p>
+                            </div>`;
+                }).join('');
+                
+                // Check for the overall card status (for the banner)
                 const isNotPracticing = doctor.Status && doctor.Status.toLowerCase().trim() === 'tidak praktek';
                 const cardClass = isNotPracticing ? 'not-practicing' : '';
                 
