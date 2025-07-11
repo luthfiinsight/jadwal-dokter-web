@@ -46,7 +46,7 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
-            padding: 1rem; /* Adjusted for smaller content */
+            padding: 2rem;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -56,10 +56,10 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem; /* Adjusted */
+            padding: 1.5rem;
             background-color: var(--card-bg);
-            border-radius: 20px; /* Adjusted */
-            box-shadow: 0 10px 25px var(--shadow-color); /* Adjusted */
+            border-radius: 25px;
+            box-shadow: 0 15px 30px var(--shadow-color);
             transition: transform var(--transition-speed) ease-in-out, background-color var(--transition-speed), box-shadow var(--transition-speed);
             border: 1px solid var(--border-color);
             flex-grow: 1;
@@ -67,50 +67,50 @@
 
         .header {
             text-align: center;
-            margin-bottom: 1.5rem; /* Adjusted */
-            padding-bottom: 1rem; /* Adjusted */
-            border-bottom: 1px solid var(--border-color); /* Adjusted */
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
             position: relative;
         }
 
         .header h1 {
-            font-size: 1.4rem; /* REDUCED */
+            font-size: 2.8rem; /* RESTORED to original size */
             font-weight: 700;
             background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
-            margin-bottom: 0.25rem; /* Adjusted */
+            margin-bottom: 0.5rem;
         }
 
         .header p {
-            font-size: 0.55rem; /* REDUCED */
+            font-size: 1.1rem; /* RESTORED to original size */
             color: var(--light-text);
         }
 
         #darkModeToggle {
             position: absolute;
-            top: 1rem; /* Adjusted */
-            right: 1rem; /* Adjusted */
+            top: 1.5rem;
+            right: 1.5rem;
             background: var(--card-bg);
-            border: 1px solid var(--border-color); /* Adjusted */
+            border: 2px solid var(--border-color);
             border-radius: 50%;
-            width: 35px; /* Adjusted */
-            height: 35px; /* Adjusted */
+            width: 45px;
+            height: 45px;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
             transition: all var(--transition-speed);
-            box-shadow: 0 2px 6px var(--shadow-color); /* Adjusted */
+            box-shadow: 0 4px 8px var(--shadow-color);
         }
         #darkModeToggle:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 8px var(--hover-shadow); /* Adjusted */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px var(--hover-shadow);
         }
         #darkModeToggle svg {
-            width: 14px; /* Adjusted */
-            height: 14px; /* Adjusted */
+            width: 20px;
+            height: 20px;
             fill: var(--text-color);
             transition: fill var(--transition-speed);
         }
@@ -121,18 +121,18 @@
 
         .controls {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjusted */
-            gap: 1rem; /* Adjusted */
-            margin-bottom: 1.5rem; /* Adjusted */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
         }
 
         .search-container input,
         .filter-container select {
             width: 100%;
-            padding: 0.5rem 0.75rem; /* Adjusted */
-            font-size: 0.5rem; /* REDUCED */
-            border: 1px solid var(--border-color); /* Adjusted */
-            border-radius: 10px; /* Adjusted */
+            padding: 1rem 1.25rem;
+            font-size: 1rem; /* RESTORED to original size */
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
             background-color: var(--bg-color);
             color: var(--text-color);
             outline: none;
@@ -142,12 +142,12 @@
         .search-container input:focus,
         .filter-container select:focus {
             border-color: #56ab2f;
-            box-shadow: 0 0 0 3px rgba(86, 171, 47, 0.2); /* Adjusted */
+            box-shadow: 0 0 0 4px rgba(86, 171, 47, 0.2);
         }
         
         body.dark-mode .search-container input:focus,
         body.dark-mode .filter-container select:focus {
-            box-shadow: 0 0 0 3px rgba(168, 224, 99, 0.3); /* Adjusted */
+            box-shadow: 0 0 0 4px rgba(168, 224, 99, 0.3);
         }
 
         .search-container input::placeholder {
@@ -159,21 +159,21 @@
         }
 
         .category-section {
-            margin-top: 1.5rem; /* Adjusted */
-            margin-bottom: 1rem; /* Adjusted */
+            margin-top: 3rem;
+            margin-bottom: 2rem;
         }
         
         .loading-text, .no-results-text {
             text-align: center;
-            font-size: 0.6rem; /* REDUCED */
+            font-size: 1.2rem; /* RESTORED to original size */
             color: var(--light-text);
-            margin-top: 25px; /* Adjusted */
+            margin-top: 50px;
             grid-column: 1 / -1;
         }
 
         .category-section h2 {
-            font-size: 1.1rem; /* REDUCED */
-            margin-bottom: 1.5rem; /* Adjusted */
+            font-size: 2.2rem; /* RESTORED to original size */
+            margin-bottom: 2rem;
             text-align: center;
             color: #56ab2f;
             position: relative;
@@ -182,29 +182,29 @@
         .category-section h2::after {
             content: '';
             position: absolute;
-            bottom: -5px; /* Adjusted */
+            bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 40px; /* Adjusted */
-            height: 2px; /* Adjusted */
+            width: 80px;
+            height: 5px;
             background: var(--secondary-gradient);
-            border-radius: 2px;
+            border-radius: 5px;
         }
         
         .doctor-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Adjusted for smaller content */
-            gap: 1rem; /* Adjusted */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
         }
 
         .doctor-card {
             background: var(--card-bg);
-            border-radius: 15px; /* Adjusted */
-            padding: 1rem; /* Adjusted */
+            border-radius: 20px;
+            padding: 1.5rem; /* Adjusted padding for content */
             display: flex;
             flex-direction: column;
             text-align: left;
-            box-shadow: 0 5px 10px var(--shadow-color); /* Adjusted */
+            box-shadow: 0 10px 20px var(--shadow-color);
             transition: transform var(--transition-speed), box-shadow var(--transition-speed), background-color var(--transition-speed), border-color var(--transition-speed);
             border: 1px solid var(--border-color);
             position: relative;
@@ -218,15 +218,15 @@
         .doctor-card.not-practicing::before {
             content: 'TIDAK PRAKTEK';
             position: absolute;
-            top: 8px; /* Adjusted */
-            right: -25px; /* Adjusted */
+            top: 15px;
+            right: -45px;
             background: var(--danger-color);
             color: white;
-            padding: 3px 20px; /* Adjusted */
-            font-size: 0.4rem; /* REDUCED */
+            padding: 5px 40px;
+            font-size: 0.8rem; /* Kept slightly larger for visibility */
             font-weight: bold;
             transform: rotate(45deg);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         .doctor-card.not-practicing h3,
         .doctor-card.not-practicing .schedule strong {
@@ -239,41 +239,43 @@
         }
 
         .doctor-card:hover {
-            transform: translateY(-5px); /* Adjusted */
-            box-shadow: 0 10px 20px var(--hover-shadow); /* Adjusted */
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px var(--hover-shadow);
         }
 
+        /* === FONT SIZE REDUCTION FOR DOCTOR CARD CONTENT === */
         .doctor-card h3 {
-            font-size: 0.85rem; /* REDUCED */
+            font-size: 0.9rem; /* REDUCED */
             font-weight: 700;
-            margin-bottom: 0.25rem; /* Adjusted */
+            margin-bottom: 0.25rem;
             color: var(--text-color);
             transition: color var(--transition-speed);
         }
 
         .doctor-card p {
-            font-size: 0.5rem; /* REDUCED */
+            font-size: 0.55rem; /* REDUCED */
             color: var(--light-text);
-            margin-bottom: 0.25rem; /* Adjusted */
+            margin-bottom: 0.25rem;
         }
         
         .doctor-card .specialty {
             background: var(--primary-gradient);
             color: #fff;
-            padding: 0.2rem 0.6rem; /* Adjusted */
-            border-radius: 15px; /* Adjusted */
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
             font-weight: 600;
-            font-size: 0.45rem; /* REDUCED */
-            margin-bottom: 0.5rem; /* Adjusted */
+            font-size: 0.5rem; /* REDUCED */
+            margin-bottom: 0.75rem;
             display: inline-block;
         }
+        /* ====================================================== */
 
         .doctor-card .schedule {
             width: 100%;
             background-color: var(--bg-color);
-            padding: 0.5rem; /* Adjusted */
-            border-radius: 10px; /* Adjusted */
-            margin-top: 0.5rem; /* Adjusted */
+            padding: 0.75rem; /* Adjusted padding */
+            border-radius: 15px;
+            margin-top: 0.75rem;
             border: 1px dashed var(--border-color);
             transition: background-color var(--transition-speed), border-color var(--transition-speed);
         }
@@ -284,36 +286,36 @@
 
         .doctor-card .schedule strong {
             display: block;
-            margin-bottom: 0.25rem; /* Adjusted */
+            margin-bottom: 0.25rem;
             font-weight: 700;
             color: #56ab2f;
             transition: color var(--transition-speed);
+            font-size: 0.5rem; /* REDUCED */
         }
 
         .doctor-card .schedule p {
             margin: 0;
             color: var(--text-color);
-            font-size: 0.475rem; /* REDUCED */
+            font-size: 0.5rem; /* REDUCED */
         }
         
         .pagination-controls {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 1.5rem; /* Adjusted */
-            gap: 0.25rem; /* Adjusted */
+            margin-top: 2.5rem;
+            gap: 0.5rem;
         }
         .pagination-controls button {
             background-color: var(--card-bg);
-            border: 1px solid var(--border-color); /* Adjusted */
+            border: 2px solid var(--border-color);
             color: var(--text-color);
-            padding: 0.3rem 0.5rem; /* Adjusted */
-            border-radius: 8px; /* Adjusted */
+            padding: 0.6rem 1rem;
+            border-radius: 10px;
             cursor: pointer;
             transition: all var(--transition-speed);
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
-            font-size: 0.5rem; /* Added to ensure consistency */
         }
         .pagination-controls button:hover:not(:disabled) {
             background: #56ab2f;
@@ -326,30 +328,33 @@
         }
         .pagination-controls .page-number {
             font-weight: 600;
-            font-size: 0.5rem; /* REDUCED */
-            padding: 0 0.25rem;
         }
 
         .footer {
             text-align: center;
-            padding: 1rem; /* Adjusted */
-            margin-top: 1.5rem; /* Adjusted */
-            font-size: 0.45rem; /* REDUCED */
+            padding: 1.5rem;
+            margin-top: 3rem;
+            font-size: 0.9rem; /* RESTORED to original size */
             color: var(--light-text);
             border-top: 1px solid var(--border-color);
         }
 
+        @media (max-width: 1200px) {
+            .doctor-list {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
         @media (max-width: 768px) {
-            body { padding: 0.5rem; }
-            .container { padding: 0.75rem; border-radius: 10px; }
-            .header h1 { font-size: 1.1rem; /* REDUCED */ }
-            .header p { font-size: 0.5rem; /* REDUCED */ }
-            #darkModeToggle { top: 0.5rem; right: 0.5rem; width: 30px; height: 30px; }
-            #darkModeToggle svg { width: 12px; height: 12px; }
+            body { padding: 1rem; }
+            .container { padding: 1rem; border-radius: 15px; }
+            .header h1 { font-size: 2.2rem; }
+            .header p { font-size: 1rem; }
+            #darkModeToggle { top: 1rem; right: 1rem; width: 40px; height: 40px; }
             .controls { grid-template-columns: 1fr; }
             .doctor-list { grid-template-columns: 1fr; }
-            .doctor-card { padding: 0.75rem; }
-            .doctor-card h3 { font-size: 0.75rem; /* REDUCED */ }
+            .doctor-card { padding: 1.5rem; }
+            .doctor-card h3 { font-size: 1rem; /* Adjusted for mobile */ }
         }
     </style>
 </head>
@@ -412,8 +417,7 @@
     </footer>
 
     <script>
-        // The JavaScript logic remains the same as the previous version.
-        // No changes were needed here for the font size adjustment.
+        // The JavaScript logic remains unchanged.
         const SPREADSHEET_API_URL = 'https://script.google.com/macros/s/AKfycbzdoWs_wOIpolNKjTnx9mS69c_I8JPmdhxP0vK71rxc6qGJgIu6IPj3lEzXvW14VWbC6A/exec';
         let allDoctorsData = [];
         let filteredDoctorsData = []; 
@@ -450,7 +454,7 @@
                 }
                 
                 populateSpecialtyFilter(allDoctorsData);
-                filterDoctors();
+                filterDoctors(); // Initial render based on default filters
             } catch (error) {
                 console.error("Error fetching data:", error);
                 const errorMessage = `<p class="loading-text" style="color: red;"><strong>Gagal Memuat Data:</strong> ${error.message}.<br><br>Pastikan Web App URL sudah benar dan skrip di-deploy ulang dengan akses 'Anyone'.</p>`;
@@ -488,7 +492,7 @@
                         NamaDokter: current.NamaDokter,
                         Spesialisasi: current.Spesialisasi,
                         Layanan: current.Layanan,
-                        Status: current.Status,
+                        Status: current.Status, 
                         Jadwal: [{ Hari: current.Hari, Jam: current.Jam }] 
                     });
                 }
@@ -516,7 +520,7 @@
             document.getElementById(`${serviceType}-section`).style.display = 'block';
 
             const totalPages = Math.ceil(doctors.length / state.itemsPerPage);
-            state.currentPage = Math.min(state.currentPage, totalPages) || 1;
+            state.currentPage = Math.min(state.currentPage, totalPages) || 1; 
 
             const start = (state.currentPage - 1) * state.itemsPerPage;
             const end = start + state.itemsPerPage;
@@ -540,7 +544,7 @@
                 const cardHTML = `
                     <div class="doctor-card ${cardClass}">
                         <h3>${doctor.NamaDokter}</h3>
-                        <span class="specialty">Spesialis ${doctor.Spesialisasi}</span>
+                        <p><span class="specialty">Spesialis ${doctor.Spesialisasi}</span></p>
                         <div class="schedule">
                             ${jadwalHTML}
                         </div>
