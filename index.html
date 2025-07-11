@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS Anda tetap sama, tidak ada yang diubah */
         :root {
             --primary-gradient: linear-gradient(135deg, #a8e063, #56ab2f);
             --secondary-gradient: linear-gradient(135deg, #fceabb, #f8b500);
@@ -20,9 +19,10 @@
             --shadow-color: rgba(0, 0, 0, 0.08);
             --hover-shadow: rgba(0, 0, 0, 0.15);
             --transition-speed: 0.3s;
+            --danger-color: #e53e3e;
+            --danger-bg-color: #fed7d7;
         }
 
-        /* === DARK MODE STYLES START === */
         body.dark-mode {
             --bg-color: #1a202c;
             --card-bg: #2d3748;
@@ -31,9 +31,9 @@
             --border-color: #4a5568;
             --shadow-color: rgba(0, 0, 0, 0.2);
             --hover-shadow: rgba(0, 0, 0, 0.4);
+            --danger-color: #fc8181;
+            --danger-bg-color: #4a2a2a;
         }
-        /* === DARK MODE STYLES END === */
-
 
         * {
             box-sizing: border-box;
@@ -70,7 +70,7 @@
             margin-bottom: 2.5rem;
             padding-bottom: 1.5rem;
             border-bottom: 2px solid var(--border-color);
-            position: relative; /* Needed for positioning the toggle */
+            position: relative;
         }
 
         .header h1 {
@@ -88,7 +88,6 @@
             color: var(--light-text);
         }
 
-        /* === DARK MODE TOGGLE BUTTON STYLE === */
         #darkModeToggle {
             position: absolute;
             top: 1.5rem;
@@ -120,7 +119,6 @@
         body.dark-mode .moon-icon { display: none; }
         body.dark-mode .sun-icon { display: block; }
 
-
         .controls {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -147,7 +145,6 @@
             box-shadow: 0 0 0 4px rgba(86, 171, 47, 0.2);
         }
         
-        /* Dark mode specific focus style */
         body.dark-mode .search-container input:focus,
         body.dark-mode .filter-container select:focus {
             box-shadow: 0 0 0 4px rgba(168, 224, 99, 0.3);
@@ -166,11 +163,12 @@
             margin-bottom: 2rem;
         }
         
-        .loading-text {
+        .loading-text, .no-results-text {
             text-align: center;
             font-size: 1.2rem;
             color: var(--light-text);
             margin-top: 50px;
+            grid-column: 1 / -1; /* Span all columns */
         }
 
         .category-section h2 {
@@ -195,7 +193,8 @@
         
         .doctor-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            /* Changed to 4 columns */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
 
@@ -207,9 +206,41 @@
             flex-direction: column;
             text-align: left;
             box-shadow: 0 10px 20px var(--shadow-color);
-            transition: transform var(--transition-speed), box-shadow var(--transition-speed), background-color var(--transition-speed);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed), background-color var(--transition-speed), border-color var(--transition-speed);
             border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
         }
+        
+        /* === STATUS: TIDAK PRAKTEK STYLE START === */
+        .doctor-card.not-practicing {
+            background-color: var(--danger-bg-color);
+            border-color: var(--danger-color);
+        }
+        .doctor-card.not-practicing::before {
+            content: 'TIDAK PRAKTEK';
+            position: absolute;
+            top: 15px;
+            right: -45px;
+            background: var(--danger-color);
+            color: white;
+            padding: 5px 40px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .doctor-card.not-practicing h3,
+        .doctor-card.not-practicing .schedule strong {
+            color: var(--danger-color);
+            text-decoration: line-through;
+        }
+         .doctor-card.not-practicing > *,
+         .doctor-card.not-practicing .schedule p {
+            opacity: 0.7;
+        }
+        /* === STATUS: TIDAK PRAKTEK STYLE END === */
+
 
         .doctor-card:hover {
             transform: translateY(-10px);
@@ -221,6 +252,7 @@
             font-weight: 700;
             margin-bottom: 0.5rem;
             color: var(--text-color);
+            transition: color var(--transition-speed);
         }
 
         .doctor-card p {
@@ -247,7 +279,11 @@
             border-radius: 15px;
             margin-top: 1rem;
             border: 1px dashed var(--border-color);
-            transition: background-color var(--transition-speed);
+            transition: background-color var(--transition-speed), border-color var(--transition-speed);
+        }
+        
+        .doctor-card.not-practicing .schedule {
+            border-color: var(--danger-color);
         }
 
         .doctor-card .schedule strong {
@@ -255,6 +291,7 @@
             margin-bottom: 0.5rem;
             font-weight: 700;
             color: #56ab2f;
+            transition: color var(--transition-speed);
         }
 
         .doctor-card .schedule p {
@@ -262,6 +299,39 @@
             color: var(--text-color);
             font-size: 0.95rem;
         }
+        
+        /* === PAGINATION STYLE START === */
+        .pagination-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2.5rem;
+            gap: 0.5rem;
+        }
+        .pagination-controls button {
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.6rem 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        .pagination-controls button:hover:not(:disabled) {
+            background: #56ab2f;
+            color: white;
+            border-color: #56ab2f;
+        }
+        .pagination-controls button:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+        .pagination-controls .page-number {
+            font-weight: 600;
+        }
+        /* === PAGINATION STYLE END === */
 
         .footer {
             text-align: center;
@@ -272,36 +342,26 @@
             border-top: 1px solid var(--border-color);
         }
 
-        /* Responsif untuk layar yang lebih kecil */
+        @media (max-width: 1200px) {
+            .doctor-list {
+                /* 3 columns on tablets */
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
         @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-            .container {
-                padding: 1rem;
-                border-radius: 15px;
-            }
-            .header h1 {
-                font-size: 2.2rem;
-            }
-            .header p {
-                font-size: 1rem;
-            }
-            #darkModeToggle {
-                top: 1rem;
-                right: 1rem;
-                width: 40px;
-                height: 40px;
-            }
-            .controls {
+            body { padding: 1rem; }
+            .container { padding: 1rem; border-radius: 15px; }
+            .header h1 { font-size: 2.2rem; }
+            .header p { font-size: 1rem; }
+            #darkModeToggle { top: 1rem; right: 1rem; width: 40px; height: 40px; }
+            .controls { grid-template-columns: 1fr; }
+            .doctor-list {
+                /* 1 column on mobile */
                 grid-template-columns: 1fr;
             }
-            .doctor-card {
-                padding: 1.5rem;
-            }
-            .doctor-card h3 {
-                font-size: 1.5rem;
-            }
+            .doctor-card { padding: 1.5rem; }
+            .doctor-card h3 { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -345,19 +405,17 @@
                 </select>
             </div>
         </div>
-
+        
         <div class="category-section" id="eksekutif-section">
             <h2>Layanan Eksekutif</h2>
-            <div class="doctor-list" id="eksekutif-list">
-                <p class="loading-text">Memuat data dokter...</p>
-            </div>
+            <div class="doctor-list" id="eksekutif-list"></div>
+            <div class="pagination-controls" id="eksekutif-pagination"></div>
         </div>
         
         <div class="category-section" id="bpjs-section">
             <h2>Layanan BPJS</h2>
-            <div class="doctor-list" id="bpjs-list">
-                <p class="loading-text">Memuat data dokter...</p>
-            </div>
+            <div class="doctor-list" id="bpjs-list"></div>
+            <div class="pagination-controls" id="bpjs-pagination"></div>
         </div>
     </div>
 
@@ -366,9 +424,15 @@
     </footer>
 
     <script>
-        // --- SCRIPT UTAMA ANDA ---
         const SPREADSHEET_API_URL = 'https://script.google.com/macros/s/AKfycbzdoWs_wOIpolNKjTnx9mS69c_I8JPmdhxP0vK71rxc6qGJgIu6IPj3lEzXvW14VWbC6A/exec';
         let allDoctorsData = [];
+        let filteredDoctorsData = []; 
+        
+        // State for pagination
+        const paginationState = {
+            eksekutif: { currentPage: 1, itemsPerPage: 12 },
+            bpjs: { currentPage: 1, itemsPerPage: 12 }
+        };
 
         async function fetchDoctorData() {
             const eksekutifList = document.getElementById('eksekutif-list');
@@ -391,21 +455,18 @@
                 allDoctorsData = data;
                 
                 if (allDoctorsData.length === 0) {
-                    eksekutifList.innerHTML = '<p class="loading-text">Tidak ada data dokter yang ditemukan di spreadsheet.</p>';
+                    eksekutifList.innerHTML = '<p class="no-results-text">Tidak ada data dokter yang ditemukan di spreadsheet.</p>';
                     bpjsList.innerHTML = '';
                     return;
                 }
-
-                eksekutifList.innerHTML = '';
-                bpjsList.innerHTML = '';
-
+                
                 populateSpecialtyFilter(allDoctorsData);
-                renderDoctors(allDoctorsData);
+                filterDoctors(); // Initial render based on default filters
             } catch (error) {
                 console.error("Error fetching data:", error);
                 const errorMessage = `<p class="loading-text" style="color: red;"><strong>Gagal Memuat Data:</strong> ${error.message}.<br><br>Pastikan Web App URL sudah benar dan skrip di-deploy ulang dengan akses 'Anyone'.</p>`;
-                eksekutifList.innerHTML = errorMessage;
-                bpjsList.innerHTML = '';
+                document.getElementById('eksekutif-section').innerHTML = errorMessage;
+                document.getElementById('bpjs-section').style.display = 'none';
             }
         }
 
@@ -413,45 +474,86 @@
             const specialtyFilter = document.getElementById('specialtyFilter');
             const specialties = [...new Set(doctors.map(doc => doc.Spesialisasi).filter(Boolean))];
             
+            // Clear old options except the first one
             while (specialtyFilter.options.length > 1) {
                 specialtyFilter.remove(1);
             }
             
-            specialties.forEach(specialty => {
+            specialties.sort().forEach(specialty => {
                 const option = document.createElement('option');
                 option.value = specialty;
                 option.textContent = `Spesialis ${specialty}`;
                 specialtyFilter.appendChild(option);
             });
         }
-
-        function renderDoctors(doctors) {
-            const eksekutifList = document.getElementById('eksekutif-list');
-            const bpjsList = document.getElementById('bpjs-list');
-            
-            eksekutifList.innerHTML = '';
-            bpjsList.innerHTML = '';
-            
-            let foundEksekutif = false;
-            let foundBPJS = false;
-            
-            const groupedByDoctor = doctors.reduce((acc, current) => {
-                const existingDoctor = acc.find(doc => doc.NamaDokter === current.NamaDokter && doc.Spesialisasi === current.Spesialisasi && doc.Layanan === current.Layanan);
+        
+        function groupDoctors(doctors) {
+            // Group schedules by doctor, specialty, service, and status
+            return doctors.reduce((acc, current) => {
+                const key = `${current.NamaDokter}-${current.Spesialisasi}-${current.Layanan}-${current.Status}`;
+                let existingDoctor = acc.find(doc => doc.key === key);
+                
                 if (existingDoctor) {
                     existingDoctor.Jadwal.push({ Hari: current.Hari, Jam: current.Jam });
                 } else {
-                    acc.push({ ...current, Jadwal: [{ Hari: current.Hari, Jam: current.Jam }] });
+                    acc.push({ 
+                        key: key,
+                        NamaDokter: current.NamaDokter,
+                        Spesialisasi: current.Spesialisasi,
+                        Layanan: current.Layanan,
+                        Status: current.Status, // Make sure to get the Status
+                        Jadwal: [{ Hari: current.Hari, Jam: current.Jam }] 
+                    });
                 }
                 return acc;
             }, []);
+        }
 
-            groupedByDoctor.forEach(doctor => {
-                const jadwalHTML = doctor.Jadwal.map(schedule => {
+        function renderPaginatedDoctors(serviceType, doctors) {
+            const listElement = document.getElementById(`${serviceType}-list`);
+            const paginationElement = document.getElementById(`${serviceType}-pagination`);
+            const state = paginationState[serviceType];
+            
+            listElement.innerHTML = '';
+            paginationElement.innerHTML = '';
+
+            if (doctors.length === 0) {
+                const serviceFilterValue = document.getElementById('serviceFilter').value;
+                // Show message only if this service type is selected or all are selected
+                if (serviceFilterValue === '' || serviceFilterValue === (serviceType === 'eksekutif' ? 'Eksekutif' : 'BPJS')) {
+                     listElement.innerHTML = '<p class="no-results-text">Tidak ada dokter yang cocok dengan kriteria.</p>';
+                }
+                document.getElementById(`${serviceType}-section`).style.display = listElement.innerHTML ? 'block' : 'none';
+                return;
+            }
+
+            document.getElementById(`${serviceType}-section`).style.display = 'block';
+
+            const totalPages = Math.ceil(doctors.length / state.itemsPerPage);
+            state.currentPage = Math.min(state.currentPage, totalPages) || 1; // Ensure current page is valid
+
+            const start = (state.currentPage - 1) * state.itemsPerPage;
+            const end = start + state.itemsPerPage;
+            const paginatedDoctors = doctors.slice(start, end);
+
+            paginatedDoctors.forEach(doctor => {
+                // Sort schedule by day of the week
+                const dayOrder = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+                const sortedJadwal = doctor.Jadwal.sort((a, b) => {
+                    const dayA = a.Hari ? parseInt(a.Hari.split('.')[0]) : 8;
+                    const dayB = b.Hari ? parseInt(b.Hari.split('.')[0]) : 8;
+                    return dayA - dayB;
+                });
+
+                const jadwalHTML = sortedJadwal.map(schedule => {
                     return `<strong>${schedule.Hari || 'Hari tidak tersedia'}:</strong><p>${schedule.Jam || 'Jam tidak tersedia'}</p>`;
                 }).join('');
+
+                const isNotPracticing = doctor.Status && doctor.Status.toLowerCase().trim() === 'tidak praktek';
+                const cardClass = isNotPracticing ? 'not-practicing' : '';
                 
                 const cardHTML = `
-                    <div class="doctor-card" data-specialty="${doctor.Spesialisasi}" data-services="${doctor.Layanan}" data-day="${doctor.Hari}">
+                    <div class="doctor-card ${cardClass}">
                         <h3>${doctor.NamaDokter}</h3>
                         <span class="specialty">Spesialis ${doctor.Spesialisasi}</span>
                         <div class="schedule">
@@ -459,35 +561,52 @@
                         </div>
                     </div>
                 `;
-
-                if (doctor.Layanan && doctor.Layanan.includes('Eksekutif')) {
-                    eksekutifList.innerHTML += cardHTML;
-                    foundEksekutif = true;
-                }
-                if (doctor.Layanan && doctor.Layanan.includes('BPJS')) {
-                    bpjsList.innerHTML += cardHTML;
-                    foundBPJS = true;
-                }
+                listElement.innerHTML += cardHTML;
             });
-
-            const eksekutifSection = document.getElementById('eksekutif-section');
-            const bpjsSection = document.getElementById('bpjs-section');
-
-            eksekutifSection.style.display = foundEksekutif ? 'block' : 'none';
-            bpjsSection.style.display = foundBPJS ? 'block' : 'none';
             
-            if (!foundEksekutif && !foundBPJS) {
-                const noResultMsg = '<p class="loading-text">Tidak ada dokter yang cocok dengan kriteria pencarian.</p>';
-                if (document.getElementById('serviceFilter').value === 'Eksekutif') {
-                    eksekutifList.innerHTML = noResultMsg;
-                    eksekutifSection.style.display = 'block';
-                } else if (document.getElementById('serviceFilter').value === 'BPJS') {
-                    bpjsList.innerHTML = noResultMsg;
-                    bpjsSection.style.display = 'block';
-                } else {
-                    eksekutifList.innerHTML = noResultMsg;
-                    eksekutifSection.style.display = 'block';
-                }
+            // Render Pagination Controls
+            if (totalPages > 1) {
+                const prevButton = document.createElement('button');
+                prevButton.textContent = 'Prev';
+                prevButton.disabled = state.currentPage === 1;
+                prevButton.onclick = () => {
+                    state.currentPage--;
+                    renderPaginatedDoctors(serviceType, doctors);
+                };
+
+                const nextButton = document.createElement('button');
+                nextButton.textContent = 'Next';
+                nextButton.disabled = state.currentPage === totalPages;
+                nextButton.onclick = () => {
+                    state.currentPage++;
+                    renderPaginatedDoctors(serviceType, doctors);
+                };
+                
+                const pageInfo = document.createElement('span');
+                pageInfo.className = 'page-number';
+                pageInfo.textContent = `${state.currentPage} / ${totalPages}`;
+
+                paginationElement.appendChild(prevButton);
+                paginationElement.appendChild(pageInfo);
+                paginationElement.appendChild(nextButton);
+            }
+        }
+        
+        function renderAllDoctors() {
+            const grouped = groupDoctors(filteredDoctorsData);
+            
+            const eksekutifDoctors = grouped.filter(d => d.Layanan.includes('Eksekutif'));
+            const bpjsDoctors = grouped.filter(d => d.Layanan.includes('BPJS'));
+            
+            renderPaginatedDoctors('eksekutif', eksekutifDoctors);
+            renderPaginatedDoctors('bpjs', bpjsDoctors);
+
+            // Hide sections if filters are active and no results are found
+            const serviceFilter = document.getElementById('serviceFilter').value;
+            if (serviceFilter === 'Eksekutif') {
+                 document.getElementById('bpjs-section').style.display = 'none';
+            } else if (serviceFilter === 'BPJS') {
+                 document.getElementById('eksekutif-section').style.display = 'none';
             }
         }
 
@@ -497,33 +616,33 @@
             const serviceFilter = document.getElementById('serviceFilter').value;
             const dayFilter = document.getElementById('dayFilter').value;
             
-            const filteredDoctors = allDoctorsData.filter(doctor => {
+            filteredDoctorsData = allDoctorsData.filter(doctor => {
                 const namaDokter = doctor.NamaDokter ? doctor.NamaDokter.toLowerCase() : '';
                 const spesialisasi = doctor.Spesialisasi ? doctor.Spesialisasi.toLowerCase() : '';
                 const layanan = doctor.Layanan ? doctor.Layanan : '';
                 const hari = doctor.Hari ? doctor.Hari : '';
 
                 const matchesSearch = namaDokter.includes(searchInput) || spesialisasi.includes(searchInput);
-                const matchesSpecialty = specialtyFilter === '' || spesialisasi === specialtyFilter.toLowerCase();
-                const matchesService = serviceFilter === '' || layanan.includes(serviceFilter);
-                const matchesDay = dayFilter === '' || hari === dayFilter;
+                const matchesSpecialty = !specialtyFilter || spesialisasi === specialtyFilter.toLowerCase();
+                const matchesService = !serviceFilter || layanan.includes(serviceFilter);
+                const matchesDay = !dayFilter || hari === dayFilter;
                 
                 return matchesSearch && matchesSpecialty && matchesService && matchesDay;
             });
             
-            renderDoctors(filteredDoctors);
+            // Reset page number on new filter
+            paginationState.eksekutif.currentPage = 1;
+            paginationState.bpjs.currentPage = 1;
+
+            renderAllDoctors();
         }
 
-        // --- DARK MODE SCRIPT ---
-        // Letakkan di dalam event listener DOMContentLoaded untuk memastikan tombolnya sudah ada
         document.addEventListener('DOMContentLoaded', () => {
-            // Jalankan fungsi utama Anda
             fetchDoctorData(); 
 
             const darkModeToggle = document.getElementById('darkModeToggle');
             const body = document.body;
 
-            // 1. Fungsi untuk menerapkan tema berdasarkan pilihan yang disimpan
             const applyTheme = (theme) => {
                 if (theme === 'dark') {
                     body.classList.add('dark-mode');
@@ -532,20 +651,14 @@
                 }
             };
             
-            // 2. Cek tema yang tersimpan di localStorage saat halaman dimuat
             const savedTheme = localStorage.getItem('theme') || 'light';
             applyTheme(savedTheme);
 
-            // 3. Tambahkan event listener untuk tombol toggle
             darkModeToggle.addEventListener('click', () => {
-                // Cek tema saat ini dan ganti
-                if (body.classList.contains('dark-mode')) {
-                    localStorage.setItem('theme', 'light');
-                    applyTheme('light');
-                } else {
-                    localStorage.setItem('theme', 'dark');
-                    applyTheme('dark');
-                }
+                const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                localStorage.setItem('theme', newTheme);
+                applyTheme(newTheme);
             });
         });
     </script>
