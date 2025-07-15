@@ -68,7 +68,7 @@
 
         .header {
             text-align: center;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2.5rem; /* Reverted margin */
             padding-bottom: 1.5rem;
             border-bottom: 2px solid var(--border-color);
             position: relative;
@@ -134,6 +134,46 @@
         .sun-icon { display: none; }
         body.dark-mode .moon-icon { display: none; }
         body.dark-mode .sun-icon { display: block; }
+
+        /* === JKN BANNER STYLES START (Now in Footer) === */
+        .jkn-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            background-color: var(--bg-color);
+            padding: 1.5rem;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 900px; /* Constrain width in footer */
+            flex-wrap: wrap;
+        }
+        .jkn-banner-logo img {
+            height: 100px;
+        }
+        .jkn-banner-text p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0;
+            color: var(--text-color);
+        }
+        .jkn-banner-text p span {
+            color: #d9534f;
+            font-weight: 700;
+        }
+        .jkn-banner-stores {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .jkn-banner-stores a img {
+            height: 45px;
+            transition: transform 0.2s;
+        }
+        .jkn-banner-stores a:hover img {
+            transform: scale(1.05);
+        }
+        /* === JKN BANNER STYLES END === */
 
         .controls {
             display: grid;
@@ -353,12 +393,19 @@
         }
 
         .footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
             text-align: center;
-            padding: 1.5rem;
+            padding: 2rem 1.5rem 1.5rem;
             margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer .copyright-text {
             font-size: 0.9rem;
             color: var(--light-text);
-            border-top: 1px solid var(--border-color);
         }
         
         @keyframes pulse {
@@ -433,25 +480,32 @@
             body { padding: 1rem; }
             .container { padding: 1rem; border-radius: 15px; }
             
-            /* === MOBILE HEADER CHANGES START === */
             .header {
-                align-items: flex-start; /* Align all header content to the left */
+                align-items: flex-start;
                 text-align: left;
             }
             .header .title-container {
-                justify-content: flex-start; /* Align title container content to the left */
+                justify-content: flex-start;
                 width: 100%;
             }
             .header h1 { 
-                font-size: 1.5rem; /* Adjusted for better fit */
+                font-size: 1.5rem;
             }
             .header .title-container img {
-                height: 100px; /* 40px * 2.5 = 100px */
+                height: 100px;
             }
             .header p { 
-                font-size: 0.9rem; /* Adjusted for better fit */
+                font-size: 0.9rem;
             }
-            /* === MOBILE HEADER CHANGES END === */
+
+            .jkn-banner {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            .jkn-banner-stores {
+                flex-direction: row;
+            }
 
             #darkModeToggle { 
                 top: 1rem; 
@@ -534,7 +588,25 @@
     </a>
 
     <footer class="footer">
-        Copyright &copy; Luthfi Kurnia 2025.
+        <!-- JKN BANNER SECTION MOVED HERE -->
+        <div class="jkn-banner">
+            <div class="jkn-banner-logo">
+                <img src="https://i.imgur.com/igs9xQD.png" alt="Logo Mobile JKN">
+            </div>
+            <div class="jkn-banner-text">
+                <p>Pasien BPJS Kesehatan/ KIS?</p>
+                <p><span>WAJIB</span> Mendaftar menggunakan Mobile JKN</p>
+            </div>
+            <div class="jkn-banner-stores">
+                <a href="https://play.google.com/store/apps/details?id=app.bpjs.mobile" target="_blank">
+                    <img src="https://i.imgur.com/nNBOLoA.png" alt="Tombol Google Play Store">
+                </a>
+                <a href="https://apps.apple.com/id/app/mobile-jkn/id1237601115" target="_blank">
+                    <img src="https://i.imgur.com/1E4T3xW.png" alt="Tombol Apple App Store">
+                </a>
+            </div>
+        </div>
+        <p class="copyright-text">Copyright &copy; Luthfi Kurnia 2025.</p>
     </footer>
 
     <script>
