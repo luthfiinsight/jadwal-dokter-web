@@ -21,6 +21,7 @@
             --transition-speed: 0.3s;
             --danger-color: #e53e3e;
             --danger-bg-color: #fed7d7;
+            --whatsapp-color: #25D366;
         }
 
         body.dark-mode {
@@ -223,7 +224,7 @@
             background: var(--danger-color);
             color: white;
             padding: 5px 40px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: bold;
             transform: rotate(45deg);
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
@@ -252,7 +253,7 @@
         }
 
         .doctor-card p {
-            font-size: 0.9rem;
+            font-size: 0.55rem;
             color: var(--light-text);
             margin-bottom: 0.25rem;
         }
@@ -263,7 +264,7 @@
             padding: 0.2rem 0.8rem;
             border-radius: 30px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.5rem;
             margin-bottom: 0.75rem;
             display: inline-block;
         }
@@ -288,16 +289,15 @@
             font-weight: 700;
             color: #56ab2f;
             transition: color var(--transition-speed);
-            font-size: 0.9rem;
+            font-size: 0.5rem;
         }
 
         .doctor-card .schedule p {
             margin: 0;
             color: var(--text-color);
-            font-size: 0.9rem;
+            font-size: 0.5rem;
         }
         
-        /* === NEW STYLE FOR CANCELLED TIME SLOT === */
         .schedule .not-practicing-time strong {
             color: var(--danger-color) !important;
             text-decoration: line-through;
@@ -305,7 +305,6 @@
         .schedule .not-practicing-time p {
              color: var(--danger-color) !important;
         }
-        /* ======================================= */
 
         .pagination-controls {
             display: flex;
@@ -346,6 +345,71 @@
             color: var(--light-text);
             border-top: 1px solid var(--border-color);
         }
+        
+        /* === WHATSAPP BUTTON STYLES START === */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+            }
+            70% {
+                transform: scale(1.1);
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--whatsapp-color);
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: pulse 2s infinite;
+            text-decoration: none;
+        }
+        
+        .whatsapp-float:hover {
+            animation-play-state: paused;
+            transform: scale(1.1);
+        }
+
+        .whatsapp-float svg {
+            width: 35px;
+            height: 35px;
+            fill: white;
+        }
+        
+        .whatsapp-tooltip {
+            position: fixed;
+            bottom: 40px;
+            right: 100px;
+            background-color: var(--card-bg);
+            padding: 8px 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-color);
+            white-space: nowrap;
+            z-index: 99;
+            transition: all var(--transition-speed);
+        }
+        /* === WHATSAPP BUTTON STYLES END === */
+
 
         @media (max-width: 1200px) {
             .doctor-list {
@@ -363,6 +427,9 @@
             .doctor-list { grid-template-columns: 1fr; }
             .doctor-card { padding: 1.5rem; }
             .doctor-card h3 { font-size: 1rem; }
+            .whatsapp-tooltip {
+                display: none; /* Hide tooltip on small screens to save space */
+            }
         }
     </style>
 </head>
@@ -419,7 +486,13 @@
             <div class="pagination-controls" id="bpjs-pagination"></div>
         </div>
     </div>
-
+    
+    <div class="whatsapp-tooltip">
+        Informasi Lebih Lanjut yuks hubungi kami :)
+    </div>
+    <a href="https://wa.me/6281228995086" class="whatsapp-float" target="_blank" aria-label="Chat di WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.8 0-67.6-9.5-97.2-26.7l-7.1-4.2-72.2 18.9L46.8 351l-4.5-7.3c-18.9-30.1-29.6-65.4-29.6-102.1 0-110.2 89.9-200 200-200 55.2 0 105.7 21.5 141.4 57.2 35.8 35.8 57.2 86.3 57.2 141.4 0 110.2-89.9 200-200 200zm107.7-164.5c-3.3-1.7-19.8-9.8-22.8-10.9-3.1-1.1-5.4-1.7-7.6 1.7-2.2 3.3-8.6 10.9-10.6 13.1-1.9 2.2-3.8 2.5-7.1 0.8-3.3-1.7-14.1-5.2-26.8-16.6-9.9-8.9-16.5-19.8-18.5-23.1-2-3.3-.2-5.1 1.5-6.8 1.5-1.5 3.3-3.9 5-5.2 1.7-1.3 2.2-2.2 3.3-3.8 1.1-1.6 0.6-3 0.3-4.2s-7.6-18.3-10.4-25.1c-2.8-6.8-5.6-5.9-7.6-5.9-2-.1-4.2-.1-6.3-.1-2.2 0-5.7 0.8-8.8 3.8-3.1 3-11.9 11.6-11.9 28.2 0 16.5 12.2 32.7 13.9 35 1.7 2.2 23.8 36.3 58.7 51.3 8.5 3.7 15.2 5.9 20.2 7.6 5.1 1.7 9.8 1.5 13.5 0.9 4.2-.7 19.8-8.1 22.5-15.9 2.8-7.8 2.8-14.4 2-15.9-0.9-1.4-3.3-2.2-6.3-3.8z"/></svg>
+    </a>
     <footer class="footer">
         Copyright &copy; Luthfi Kurnia 2025.
     </footer>
@@ -486,7 +559,6 @@
             });
         }
         
-        // MODIFIED groupDoctors to handle both overall Status and per-time Keterangan
         function groupDoctors(doctors) {
             const grouped = doctors.reduce((acc, current) => {
                 const key = `${current.NamaDokter}-${current.Spesialisasi}-${current.Layanan}`;
@@ -497,20 +569,18 @@
                         NamaDokter: current.NamaDokter,
                         Spesialisasi: current.Spesialisasi,
                         Layanan: current.Layanan,
-                        Status: '', // Default overall status
+                        Status: '', 
                         Jadwal: []
                     };
                     existingDoctor = acc[key];
                 }
 
-                // Add schedule with its specific Keterangan
                 existingDoctor.Jadwal.push({
                     Hari: current.Hari,
                     Jam: current.Jam,
-                    Keterangan: current.Keterangan // Capture the Keterangan for the specific time
+                    Keterangan: current.Keterangan
                 });
 
-                // If any row for a doctor is marked "Tidak Praktek", the entire card gets the banner
                 if (current.Status && current.Status.toLowerCase().trim() === 'tidak praktek') {
                     existingDoctor.Status = 'Tidak Praktek';
                 }
@@ -554,7 +624,6 @@
                     return dayA - dayB;
                 });
                 
-                // MODIFIED jadwalHTML to check Keterangan for each time slot
                 const jadwalHTML = sortedJadwal.map(schedule => {
                     const isTimeNotPracticing = schedule.Keterangan && schedule.Keterangan.toLowerCase().trim() === 'tidak praktek';
                     const timeSlotClass = isTimeNotPracticing ? 'not-practicing-time' : '';
@@ -565,7 +634,6 @@
                             </div>`;
                 }).join('');
                 
-                // Check for the overall card status (for the banner)
                 const isNotPracticing = doctor.Status && doctor.Status.toLowerCase().trim() === 'tidak praktek';
                 const cardClass = isNotPracticing ? 'not-practicing' : '';
                 
