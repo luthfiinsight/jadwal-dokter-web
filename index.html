@@ -72,6 +72,16 @@
             padding-bottom: 1.5rem;
             border-bottom: 2px solid var(--border-color);
             position: relative;
+            display: flex; /* Added for alignment */
+            flex-direction: column; /* Stack title and subtitle */
+            align-items: center; /* Center items */
+        }
+
+        .header .title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px; /* Space between logo and text */
         }
 
         .header h1 {
@@ -80,13 +90,18 @@
             background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            display: inline-block;
-            margin-bottom: 0.5rem;
+            margin: 0; /* Reset margin */
+        }
+
+        .header .title-container img {
+            height: 120px; /* Logo size increased 4x from 30px */
+            width: auto;
         }
 
         .header p {
             font-size: 1.1rem;
             color: var(--light-text);
+            margin-top: 0.5rem; /* Space below title */
         }
 
         #darkModeToggle {
@@ -224,7 +239,7 @@
             background: var(--danger-color);
             color: white;
             padding: 5px 40px;
-            font-size: 1rem;
+            font-size: 0.8rem;
             font-weight: bold;
             transform: rotate(45deg);
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
@@ -245,7 +260,7 @@
         }
 
         .doctor-card h3 {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 700;
             margin-bottom: 0.25rem;
             color: var(--text-color);
@@ -253,7 +268,7 @@
         }
 
         .doctor-card p {
-            font-size: 1rem;
+            font-size: 0.55rem;
             color: var(--light-text);
             margin-bottom: 0.25rem;
         }
@@ -264,7 +279,7 @@
             padding: 0.2rem 0.8rem;
             border-radius: 30px;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.5rem;
             margin-bottom: 0.75rem;
             display: inline-block;
         }
@@ -289,13 +304,13 @@
             font-weight: 700;
             color: #56ab2f;
             transition: color var(--transition-speed);
-            font-size: 1rem;
+            font-size: 0.5rem;
         }
 
         .doctor-card .schedule p {
             margin: 0;
             color: var(--text-color);
-            font-size: 1rem;
+            font-size: 0.5rem;
         }
         
         .schedule .not-practicing-time strong {
@@ -341,12 +356,11 @@
             text-align: center;
             padding: 1.5rem;
             margin-top: 3rem;
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--light-text);
             border-top: 1px solid var(--border-color);
         }
         
-        /* === WHATSAPP BUTTON STYLES START === */
         @keyframes pulse {
             0% {
                 transform: scale(1);
@@ -401,15 +415,13 @@
             border-radius: 15px;
             box-shadow: 0 4px 8px var(--shadow-color);
             border: 1px solid var(--border-color);
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: var(--text-color);
             white-space: nowrap;
             z-index: 99;
             transition: all var(--transition-speed);
         }
-        /* === WHATSAPP BUTTON STYLES END === */
-
 
         @media (max-width: 1200px) {
             .doctor-list {
@@ -420,7 +432,10 @@
         @media (max-width: 768px) {
             body { padding: 1rem; }
             .container { padding: 1rem; border-radius: 15px; }
-            .header h1 { font-size: 2.2rem; }
+            .header h1 { font-size: 1.8rem; } /* Adjusted for smaller screens */
+            .header .title-container img {
+                height: 40px; /* Responsive logo size for mobile */
+            }
             .header p { font-size: 1rem; }
             #darkModeToggle { top: 1rem; right: 1rem; width: 40px; height: 40px; }
             .controls { grid-template-columns: 1fr; }
@@ -428,7 +443,7 @@
             .doctor-card { padding: 1.5rem; }
             .doctor-card h3 { font-size: 1rem; }
             .whatsapp-tooltip {
-                display: none; /* Hide tooltip on small screens to save space */
+                display: none;
             }
         }
     </style>
@@ -439,9 +454,12 @@
              <button id="darkModeToggle" aria-label="Toggle Dark Mode">
                 <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13.14C21.04,13.14 20.45,13.23 19.89,13.42C18.45,12.48 16.6,12 14.5,12C8.7,12 4,16.7 4,22.5C4,23.32 4.18,24.09 4.5,24.78C3.89,24.63 3.32,24.42 2.79,24.09C1.22,23.23 0,21.5 0,19.5C0,15.58 3.16,12.42 7.08,12.03C7.68,8.82 10.45,6.4 13.9,6.4C16.97,6.4 19.54,8.35 20.58,10.93C21.43,10.84 22.3,11.13 22.8,11.66C23.63,12.44 23.3,13.14 21.64,13.14Z"/></svg>
                 <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,7a5,5,0,0,1,5,5,5,5,0,0,1-5,5,5,5,0,0,1-5-5A5,5,0,0,1,12,7M12,9a3,3,0,0,0-3,3,3,3,0,0,0,3,3,3,3,0,0,0,3-3A3,3,0,0,0,12,9M12,2a1,1,0,0,1,1,1V5a1,1,0,0,1-2,0V3A1,1,0,0,1,12,2M19.07,4.93a1,1,0,0,1,.71.29,1,1,0,0,1,0,1.41l-2.83,2.83a1,1,0,0,1-1.41-1.41L18.36,5.64A1,1,0,0,1,19.07,4.93M22,12a1,1,0,0,1-1,1h-2a1,1,0,0,1,0-2h2A1,1,0,0,1,22,12M18.36,18.36a1,1,0,0,1-1.41,0l-2.83-2.83a1,1,0,1,1,1.41-1.41l2.83,2.83A1,1,0,0,1,18.36,18.36M12,20a1,1,0,0,1-1-1v-2a1,1,0,0,1,2,0v2A1,1,0,0,1,12,20M4.93,19.07a1,1,0,0,1-.71-.29,1,1,0,0,1,0-1.41l2.83-2.83a1,1,0,1,1,1.41,1.41L5.64,18.36A1,1,0,0,1,4.93,19.07M2,12a1,1,0,0,1,1-1H5a1,1,0,0,1,0,2H3A1,1,0,0,1,2,12M5.64,5.64A1,1,0,0,1,4.22,4.22L7.05,7.05a1,1,0,0,1-1.41,1.41Z"/></svg>
-            </button>
-            <h1>Jadwal Praktik Dokter</h1>
-            <p>Data jadwal Dapat Berubah Sewaktu-waktu Hub Operator 0751 8972525, Call Center Hermina 1500 488.</p>
+             </button>
+             <div class="title-container">
+                 <img src="https://i.imgur.com/7yMVKiO.png" alt="Logo">
+                 <h1>Jadwal Praktik Dokter</h1>
+             </div>
+             <p>Data jadwal Dapat Berubah Sewaktu-waktu Hub Operator 0751 8972525, Call Center Hermina 1500 488.</p>
         </div>
 
         <div class="controls">
@@ -493,6 +511,7 @@
     <a href="https://wa.me/6281228995086" class="whatsapp-float" target="_blank" aria-label="Chat di WhatsApp">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.8 0-67.6-9.5-97.2-26.7l-7.1-4.2-72.2 18.9L46.8 351l-4.5-7.3c-18.9-30.1-29.6-65.4-29.6-102.1 0-110.2 89.9-200 200-200 55.2 0 105.7 21.5 141.4 57.2 35.8 35.8 57.2 86.3 57.2 141.4 0 110.2-89.9 200-200 200zm107.7-164.5c-3.3-1.7-19.8-9.8-22.8-10.9-3.1-1.1-5.4-1.7-7.6 1.7-2.2 3.3-8.6 10.9-10.6 13.1-1.9 2.2-3.8 2.5-7.1 0.8-3.3-1.7-14.1-5.2-26.8-16.6-9.9-8.9-16.5-19.8-18.5-23.1-2-3.3-.2-5.1 1.5-6.8 1.5-1.5 3.3-3.9 5-5.2 1.7-1.3 2.2-2.2 3.3-3.8 1.1-1.6 0.6-3 0.3-4.2s-7.6-18.3-10.4-25.1c-2.8-6.8-5.6-5.9-7.6-5.9-2-.1-4.2-.1-6.3-.1-2.2 0-5.7 0.8-8.8 3.8-3.1 3-11.9 11.6-11.9 28.2 0 16.5 12.2 32.7 13.9 35 1.7 2.2 23.8 36.3 58.7 51.3 8.5 3.7 15.2 5.9 20.2 7.6 5.1 1.7 9.8 1.5 13.5 0.9 4.2-.7 19.8-8.1 22.5-15.9 2.8-7.8 2.8-14.4 2-15.9-0.9-1.4-3.3-2.2-6.3-3.8z"/></svg>
     </a>
+
     <footer class="footer">
         Copyright &copy; Luthfi Kurnia 2025.
     </footer>
