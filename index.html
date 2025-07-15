@@ -72,16 +72,16 @@
             padding-bottom: 1.5rem;
             border-bottom: 2px solid var(--border-color);
             position: relative;
-            display: flex; /* Added for alignment */
-            flex-direction: column; /* Stack title and subtitle */
-            align-items: center; /* Center items */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .header .title-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px; /* Space between logo and text */
+            gap: 20px;
         }
 
         .header h1 {
@@ -90,18 +90,18 @@
             background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin: 0; /* Reset margin */
+            margin: 0;
         }
 
         .header .title-container img {
-            height: 120px; /* Logo size increased 4x from 30px */
+            height: 120px;
             width: auto;
         }
 
         .header p {
             font-size: 1.1rem;
             color: var(--light-text);
-            margin-top: 0.5rem; /* Space below title */
+            margin-top: 0.5rem;
         }
 
         #darkModeToggle {
@@ -239,7 +239,7 @@
             background: var(--danger-color);
             color: white;
             padding: 5px 40px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: bold;
             transform: rotate(45deg);
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
@@ -268,7 +268,7 @@
         }
 
         .doctor-card p {
-            font-size: 0.9rem;
+            font-size: 0.55rem;
             color: var(--light-text);
             margin-bottom: 0.25rem;
         }
@@ -279,7 +279,7 @@
             padding: 0.2rem 0.8rem;
             border-radius: 30px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.5rem;
             margin-bottom: 0.75rem;
             display: inline-block;
         }
@@ -304,13 +304,13 @@
             font-weight: 700;
             color: #56ab2f;
             transition: color var(--transition-speed);
-            font-size: 0.9rem;
+            font-size: 0.5rem;
         }
 
         .doctor-card .schedule p {
             margin: 0;
             color: var(--text-color);
-            font-size: 0.9rem;
+            font-size: 0.5rem;
         }
         
         .schedule .not-practicing-time strong {
@@ -432,12 +432,33 @@
         @media (max-width: 768px) {
             body { padding: 1rem; }
             .container { padding: 1rem; border-radius: 15px; }
-            .header h1 { font-size: 1.8rem; } /* Adjusted for smaller screens */
-            .header .title-container img {
-                height: 40px; /* Responsive logo size for mobile */
+            
+            /* === MOBILE HEADER CHANGES START === */
+            .header {
+                align-items: flex-start; /* Align all header content to the left */
+                text-align: left;
             }
-            .header p { font-size: 1rem; }
-            #darkModeToggle { top: 1rem; right: 1rem; width: 40px; height: 40px; }
+            .header .title-container {
+                justify-content: flex-start; /* Align title container content to the left */
+                width: 100%;
+            }
+            .header h1 { 
+                font-size: 1.5rem; /* Adjusted for better fit */
+            }
+            .header .title-container img {
+                height: 100px; /* 40px * 2.5 = 100px */
+            }
+            .header p { 
+                font-size: 0.9rem; /* Adjusted for better fit */
+            }
+            /* === MOBILE HEADER CHANGES END === */
+
+            #darkModeToggle { 
+                top: 1rem; 
+                right: 1rem; 
+                width: 40px; 
+                height: 40px; 
+            }
             .controls { grid-template-columns: 1fr; }
             .doctor-list { grid-template-columns: 1fr; }
             .doctor-card { padding: 1.5rem; }
